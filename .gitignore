@@ -1,0 +1,12 @@
+*.user*
+jumpDesktop.tag
+*.kdev*
+Doxyfile
+html
+bin
+.kdev4
+templates
+src/debug
+src/leveleditor2
+*.o
+Makefile*
