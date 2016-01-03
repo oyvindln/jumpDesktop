@@ -12,7 +12,7 @@ A game is hosted by using the host option in the main menu. Select a map (not se
 
 Players can join the game by using the join game option in the main menu, choosing a name and entering the IP of the host.
 
-When
+Once players have joined, the host can start the game by pressing ```Start game```
 ## How to build
 
 ### Dependencies
