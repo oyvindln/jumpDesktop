@@ -22,6 +22,7 @@
 #include "ingameview.h"
 
 #include <cassert>
+#include <cmath>
 
 #include <QMouseEvent>
 #include <QPainter>
@@ -175,7 +176,7 @@ void IngameView::drawForeground(QPainter *painter, const QRectF &) {
                               mapRectToScene(m_energyBarRect));
 
         //Render sun with opacity.
-        painter->setOpacity((100.0-fabs(m_players[m_playerNumber]->balance)*2)/100.0);
+        painter->setOpacity((100.0-std::fabs(m_players[m_playerNumber]->balance)*2)/100.0);
         m_svgrenderer->render(painter, "barPower",
         mapRectToScene(m_sunRect));
         painter->setOpacity(1);
@@ -198,7 +199,7 @@ void IngameView::drawForeground(QPainter *painter, const QRectF &) {
   painter->drawPixmap(m_energyBarCenterDrawPos, m_energyBarCenterPixmap);
 
   painter->setOpacity(
-      (100.0 - fabs(m_players[m_playerNumber]->getBalance()) * 2) / 100.0);
+      (100.0 - std::fabs(m_players[m_playerNumber]->getBalance()) * 2) / 100.0);
   //      painter->setWorldMatrixEnabled(false);
 
   // If opacity is != 1.0,

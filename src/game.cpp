@@ -22,6 +22,7 @@
 #include "game.h"
 
 #include <cassert>
+#include <cmath>
 
 #include <QTimerEvent>
 
@@ -620,13 +621,13 @@ void Game::playerPlatformCollide(Player *player, const Platform &platform,
       playerR.right() >
           platformR.left()) // Checks if player is colliding with platform
   {
-    if (fabs(playerR.top() - platformR.bottom()) <
-        fabs(playerR.bottom() - platformR.top())) {
-      if (fabs(playerR.left() - platformR.right()) <
-          fabs(playerR.right() - platformR.left())) {
+    if (std::fabs(playerR.top() - platformR.bottom()) <
+        std::fabs(playerR.bottom() - platformR.top())) {
+      if (std::fabs(playerR.left() - platformR.right()) <
+          std::fabs(playerR.right() - platformR.left())) {
         // Bottom right
-        if (fabs(playerR.top() - platformR.bottom()) <
-            fabs(playerR.left() - platformR.right())) {
+        if (std::fabs(playerR.top() - platformR.bottom()) <
+            std::fabs(playerR.left() - platformR.right())) {
           //                                        player->setPos(player->x(),platformR.bottom()+1);
           player->reverseMovementY();
           qDebug("A");
@@ -643,8 +644,8 @@ void Game::playerPlatformCollide(Player *player, const Platform &platform,
         }
       } else {
         // Bottom left
-        if (fabs(playerR.top() - platformR.bottom()) <
-            fabs(playerR.right() - platformR.left())) {
+        if (std::fabs(playerR.top() - platformR.bottom()) <
+            std::fabs(playerR.right() - platformR.left())) {
           //                                        player->setPos(player->x(),platformR.bottom()+1);
           player->reverseMovementY();
           qDebug("C");
@@ -662,11 +663,11 @@ void Game::playerPlatformCollide(Player *player, const Platform &platform,
         }
       }
     } else {
-      if (fabs(playerR.left() - platformR.right()) <
-          fabs(playerR.right() - platformR.left())) {
+      if (std::fabs(playerR.left() - platformR.right()) <
+          std::fabs(playerR.right() - platformR.left())) {
         // Top right
-        if (fabs(playerR.bottom() - platformR.top()) <
-            fabs(playerR.left() - platformR.right())) {
+        if (std::fabs(playerR.bottom() - platformR.top()) <
+            std::fabs(playerR.left() - platformR.right())) {
           player->stop();
           QPointF newPos(
               player->x() +
@@ -692,8 +693,8 @@ void Game::playerPlatformCollide(Player *player, const Platform &platform,
         }
       } else {
         // Top left
-        if (fabs(playerR.bottom() - platformR.top()) <
-            fabs(playerR.right() - platformR.left())) {
+        if (std::fabs(playerR.bottom() - platformR.top()) <
+            std::fabs(playerR.right() - platformR.left())) {
           player->stop();
 
           //                              player->setPos(player->x(),

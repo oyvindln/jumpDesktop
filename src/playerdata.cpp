@@ -21,6 +21,8 @@
 
 #include "playerdata.h"
 
+#include <cmath>
+
 #include "constants.h"
 #include "dummybox.h"
 #include "player.h"
@@ -63,23 +65,23 @@ void PlayerData::syncData(const PlayerData &data, Player *player, int latency,
        data.velocity;*/
 
     if (player->isMoving()) {
-      if ((fabs(data.position.x() - player->pos().x()) > 20) ||
-          fabs(data.position.y() - player->pos().y() > 20)) {
+      if ((std::fabs(data.position.x() - player->pos().x()) > 20) ||
+          std::fabs(data.position.y() - player->pos().y() > 20)) {
         player->setPos(data.position);
         //            qDebug() << "PlayerData:: offset:" <<
         //            player->getMovementNeeded();
-      } else /* if( (fabs(newPos.x() - player->pos().x()) >
+      } else /* if( (std::fabs(newPos.x() - player->pos().x()) >
              constants::Sync_Pos_Max_Threshold) ||
-             fabs(newPos.y() - player->pos().y() >
+             std::fabs(newPos.y() - player->pos().y() >
              constants::Sync_Pos_Max_Threshold))*/
       {
         player->setMovementNeeded(newPos - player->pos(), 0.5);
         qDebug() << "PlayerData:: offset:" << player->getMovementNeeded();
       }
 
-      if ((fabs(newVelocity.x() - player->getVelocity().x()) >
+      if ((std::fabs(newVelocity.x() - player->getVelocity().x()) >
            constants::Sync_Velocity_Max_Threshold) ||
-          fabs(newVelocity.y() - player->getVelocity().y() >
+          std::fabs(newVelocity.y() - player->getVelocity().y() >
                constants::Sync_Velocity_Max_Threshold)) {
         player->setVelocity(newVelocity);
       }
@@ -87,14 +89,14 @@ void PlayerData::syncData(const PlayerData &data, Player *player, int latency,
       player->setMovementNeeded(data.position - player->pos(), 0.5);
     }
 
-    if (fabs(data.balance - player->getBalance() >
+    if (std::fabs(data.balance - player->getBalance() >
              constants::Sync_Balance_Max_Threshold)) {
       player->setBalance(data.balance);
     }
   } else {
-    if ((fabs(data.position.x() - player->pos().x()) >
+    if ((std::fabs(data.position.x() - player->pos().x()) >
          constants::Sync_Pos_Max_Threshold) ||
-        fabs(data.position.y() - player->pos().y() >
+        std::fabs(data.position.y() - player->pos().y() >
              constants::Sync_Pos_Max_Threshold)) {
       player->setMovementNeeded(player->pos() - data.position, 1.000);
     }
